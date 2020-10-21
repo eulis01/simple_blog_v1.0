@@ -11,12 +11,12 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem 'tux'
+# => Loads environment variables from `.env`.
+#gem 'dotenv', '~> 2.7', '>= 2.7.6'
 
 
 
-group :development, :test do
-  gem "better_errors"
-  gem "binding_of_caller"
+group :development do
   gem 'rspec'
   gem 'capybara'
   gem 'rack-test'
