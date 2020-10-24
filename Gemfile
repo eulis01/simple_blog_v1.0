@@ -11,12 +11,12 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem 'tux'
-# => Loads environment variables from `.env`.
-#gem 'dotenv', '~> 2.7', '>= 2.7.6'
+gem 'formtastic', '~> 3.0'
+gem 'sinatra-flash'
 
 
 
-group :development do
+group :test do
   gem 'rspec'
   gem 'capybara'
   gem 'rack-test'
