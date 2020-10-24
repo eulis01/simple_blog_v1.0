@@ -6,26 +6,41 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secrect, ENV['SESSION_SECRECT']
+    set :session_secrect, "simple_blog_secrect"
+    register Sinatra::Flash
   end
 
   get "/" do
-    erb :welcome
+    if logged_in?
+      redirect "users/#{current_user.id}"
+    else
+      erb :welcome
+    end
   end
 
-  helpers do
-    def current_user 
-      @current_user ||= User.find_by_id(session[:user_id])
-    end
+  not_found do 
+    status 404
+    erb :failure
 
-    def is_authorized?(record, path)
-      unless record.user == current_user
-      redirect path
-      end
-    end
+  helpers do
 
     def logged_in?
     !!current_user
+    end
+
+    #abstract this
+    def redirect_if_not_logged_in
+      if !logged_in?
+        redirect "/login"
+      end
+    end
+
+    def current_user
+      @current_user ||= User.find_by(id: session[:user_id])
+    end
+
+    def  authorized_to_edit?(post)
+      post.user == current_user
     end
   end
 end
