@@ -1,18 +1,23 @@
 class UsersController < ApplicationController
 
-  # GET: /users
-  get "/users" do
-    erb :"/users/index.html"
+  # GET: /login (render) the Login Form
+  get "/login" do
+    erb :"/users/login"
   end
 
-  # GET: /users/new
-  get "/users/new" do
-    erb :"/users/new.html"
-  end
+  # POST: /login Receives the data from the Login form.
+  post "/login" do
+    @user = User.find_by(email: params[:email])
+        if @user && @user.authenticate(params[:password])
+          session[:user_id] = @user.id
+          # Alert user that Login has been Accepted.
+          flash[:message] = "!!Welcome Login Accepted!!"
+          redirect to "/users/#{@user.id}"
+        else
+          flash[:error] = "Invalid  Email or Password."
+          redirect_if_not_logged_in
+        end
 
-  # POST: /users
-  post "/users" do
-    redirect "/users"
   end
 
   # GET: /users/5
