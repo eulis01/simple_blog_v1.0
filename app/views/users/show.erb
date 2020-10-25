@@ -1,1 +1,5 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1><%= @user.name %></h1>
+<img src="<%= @user.image_url %>" alt="<%= @user.name %>" height="250" width="250">
+<br><br>
+<p>Email 📧: <%= @user.email %></p>
+<p>About Me 🙍‍♂️: <%= @user.bio  %></p>
