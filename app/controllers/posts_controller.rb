@@ -33,12 +33,19 @@ class PostsController < ApplicationController
 
   # Route for an individual Post.
   get "/posts/:id" do
-    erb :"/posts/show.html"
+    @post =Post.find(params[:id])
+    erb :"/posts/show"
   end
 
-  # GET: /posts/5/edit
+  # Allow user to edit their Post but no one else's post.
   get "/posts/:id/edit" do
-    erb :"/posts/edit.html"
+    @post = Post.find(params[:id])
+      if authorized_to_edit?(@post)
+      erb :"/posts/edit"
+      else
+        flash[:error] = "Sorry! You Can't Edit This Post!"
+        redirect "/posts"
+      end
   end
 
   # PATCH: /posts/5
