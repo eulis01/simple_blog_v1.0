@@ -21,6 +21,7 @@ class ApplicationController < Sinatra::Base
   not_found do 
     status 404
     erb :failure
+  end
 
   helpers do
 
