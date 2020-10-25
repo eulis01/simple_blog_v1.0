@@ -1,1 +1,13 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h3><%= @post.title %></h3>
+<img src="<%= @post.image_url %>" alt="<%= @post.title %>" height="250" width="250">
+<br><br>
+<p><small><%= @post.description %></small></p>
+<strong>Posted: <%= @post.created_at %></strong>
+<br>
+<% if authorized_to_edit?(@post) %>
+<a href="/posts/<%= @post.id %>/edit">Edit</a>
+<form class="" action="/posts/<%= @post.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" name="" value="Delete">
+</form>
+<% end %>
