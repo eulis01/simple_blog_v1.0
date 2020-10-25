@@ -20,19 +20,23 @@ class UsersController < ApplicationController
 
   end
 
-  # GET: /users/5
+  # show the user's route
   get "/users/:id" do
-    erb :"/users/show.html"
+    @user = User.find_by(id: params[:id])
+    erb :"/users/show"
   end
 
-  # GET: /users/5/edit
-  get "/users/:id/edit" do
-    erb :"/users/edit.html"
+  # show the signup route
+  get "/signup" do
+    erb :"/users/signup"
   end
 
-  # PATCH: /users/5
-  patch "/users/:id" do
-    redirect "/users/:id"
+  # route to create user and post user and add key/value pairs.
+  post "/users" do
+    @user = User.create(params)
+    session[:user_id] = @user.id
+    # show the user profile page
+    redirect "/users/#{@user.id}"
   end
 
   # DELETE: /users/5/delete
