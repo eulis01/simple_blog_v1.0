@@ -17,7 +17,6 @@ class UsersController < ApplicationController
           flash[:error] = "Invalid  Email or Password."
           redirect_if_not_logged_in
         end
-
   end
 
   # show the user's route
@@ -39,8 +38,9 @@ class UsersController < ApplicationController
     redirect "/users/#{@user.id}"
   end
 
-  # DELETE: /users/5/delete
-  delete "/users/:id/delete" do
-    redirect "/users"
+  # Log the User out and clear session
+  get "/logout" do
+    session.clear
+    redirect "/"
   end
 end
