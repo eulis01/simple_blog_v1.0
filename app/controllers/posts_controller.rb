@@ -1,13 +1,21 @@
 class PostsController < ApplicationController
 
-  # GET: /posts
+  # adding Full C.R.U.D funcionality
+
+  # Getting all the post data from the DB.
   get "/posts" do
-    erb :"/posts/index.html"
+    @posts = Post.all.order(created_at: :desc)
+    erb :"/posts/index"
   end
 
-  # GET: /posts/new
+  # Allow the user to Create a new Post if logged in.
   get "/posts/new" do
-    erb :"/posts/new.html"
+    if logged_in?
+      erb :"/posts/new"
+    else
+      flash[:error] = "Login to create a Post!"
+      redirect_if_not_logged_in
+    end
   end
 
   # POST: /posts
