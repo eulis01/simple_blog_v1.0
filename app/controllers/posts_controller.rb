@@ -18,12 +18,20 @@ class PostsController < ApplicationController
     end
   end
 
-  # POST: /posts
+  # Saving the post created to the DB.
   post "/posts" do
-    redirect "/posts"
+    @post = Post.new(title: params[:title], image_url: params[:image_url], description: params[:description], user_id: current_user.id)
+    #verifies if the input provided is acceptable and saves validation.
+    if @post.save
+      flash[:message] = "Great! Your Post is up!" 
+    redirect "/posts/#{@post.id}"
+    else
+      flash[:error] = "Couldn't create your Post [#{@post.errors.full_messages.to_sentence}]"
+      redirect "posts/new"
+    end
   end
 
-  # GET: /posts/5
+  # Route for an individual Post.
   get "/posts/:id" do
     erb :"/posts/show.html"
   end
