@@ -23,3 +23,10 @@ and to start the local server and run the app then run:
 
 them just go to `localhost:9393` on you web browser. 
  
+ ## Contributing to this Project
+
+ All kinds of contributions are welcome! The most basic way to show your support is to ⭐️star the project, or to raise 🐞issues Also feel fre to make a pull request.
+
+ ## License
+
+Outcast is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
