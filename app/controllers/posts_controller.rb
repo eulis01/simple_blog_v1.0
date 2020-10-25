@@ -48,13 +48,16 @@ class PostsController < ApplicationController
       end
   end
 
-  # PATCH: /posts/5
   patch "/posts/:id" do
-    redirect "/posts/:id"
+    @post = Post.find(params[:id])
+    @post.update(title: params[:title], image_url: params[:image_url], description: params[:description])
+    redirect "/posts/#{@post.id}"
   end
 
-  # DELETE: /posts/5/delete
-  delete "/posts/:id/delete" do
+  # Allow User to Delete a post by id.
+  delete "/posts/:id" do
+    @post = Post.find(params[:id])
+    @post.destroy
     redirect "/posts"
   end
 end
