@@ -6,6 +6,6 @@ end
 
 # => needed to use patch, put or delete
 use Rack::MethodOverride 
-use PostsController
 use UsersController
+use PostsController
 run ApplicationController
