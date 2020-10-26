@@ -9,19 +9,25 @@ Flatiron Sinatra Project Simple Blog WebApp
 To use SimpleBlog App:
 
 - fork and clone this repository.
+- then on the Terminal run the following command:
 
-And then on the Terminal run the following command:
-`$ bundle install` 
+          $ bundle install 
 
-Then run:
+- Then run:
 
-`$ rake db:migrate`
+         $ rake db:migrate
 
-and to start the local server and run the app then run:
+-  to start the local server and run the app then run:
+  
+         $ shotgun
 
-`$ shotgun`
+- them just go to `localhost:9393` on you web browser. 
 
-them just go to `localhost:9393` on you web browser. 
+## If Having issues Loading sinatra-flash gem and part of the layout Run: thin server
+
+          $ bundle exec thin start --debug
+
+- This command will use a Rack Adapter to start thin server --debug is optional but helpful if any error will be shown in the terminal. To to use the WebApp navigate to `localhost:3000`
  
  ## Contributing to this Project
 
