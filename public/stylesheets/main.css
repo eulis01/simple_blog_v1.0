@@ -13,35 +13,51 @@
   }
 
   /* --- Welcome Page Styles --- */
+  
+  /* Links inside the navbar */
+.navbar a {
+  margin: 0 auto;
+  width: 15%;
+  padding: 8px;
+  border: 2px solid;
+  border-color: black;
+  background-color: transparent;
+  transition: 0.10s;
+  font-weight: bolder;
+  font-size: 16px;
+  color: black;
+}
+
   body {
-    background-color: rgb(3, 192, 255);
-    color: rgb(0, 0, 0);
+    background-color: black;
+    color: black;
     font-family: Sans-Serif;
     line-height: 18px;
   }
 
   .wrapper {
-    background: #fff;
-    -moz-box-shadow: 0 0 10px rgb(0, 0, 0);
-    -webkit-box-shadow: 0 0 10px rgb(0, 0, 0);
-    box-shadow: 0 0 10px rgb(0, 0, 0);
+    background: rgb(230, 227, 194);
+    -moz-box-shadow: 0 0 10px black;
+    -webkit-box-shadow: 0 0 10px black;
+    box-shadow: 0 0 10px black;
     margin: 16px auto;
     max-width: 960px;
     padding: 2.25%; /* 18px / 800px */
     width: 85%;
   }
 
-  a+a {
-    margin-left: 40px;
+  a+a {  
+    margin-left: auto;
   }
   
   h1 {
+    color: black;
     font-size: 36px;
     line-height: 54px;
   }
 
   h2 {
-    border-bottom: 2px solid #ccc;
+    border-bottom: 6px solid black;
     font-size: 24px;
     line-height: 36px;
     margin-bottom: 16px;
