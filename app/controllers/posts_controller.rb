@@ -33,7 +33,7 @@ class PostsController < ApplicationController
 
   # Route for an individual Post.
   get "/posts/:id" do
-    @post =Post.find(params[:id])
+    @post = Post.find(params[:id])
     erb :"/posts/show"
   end
 
