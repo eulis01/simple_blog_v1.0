@@ -26,7 +26,7 @@
       <h3 style="color:green;"><%= flash[:message] %></h3>
       <% end %>
 
-      <div class="nav">
+      <div class="navbar">
         <% if logged_in? %>
           <a href="/users/<%= current_user.id %>">Profile</a>
           <a href="/posts">Posts Feed</a>
