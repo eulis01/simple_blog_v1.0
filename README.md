@@ -1,3 +1,12 @@
+Dog 
+get '/dogs'
+get '/dogs/:id'
+get '/dogs/new'
+post '/dogs'
+get '/dogs/:id/edit'
+patch '/dogs/:id'
+delete '/dogs/:id'
+
 # SimpleBlog App
 
 Flatiron Sinatra Project Simple Blog WebApp
@@ -31,8 +40,8 @@ To use SimpleBlog App:
  
  ## Contributing to this Project
 
- All kinds of contributions are welcome! The most basic way to show your support is to ⭐️star the project, or to raise 🐞issues Also feel fre to make a pull request.
+ All kinds of contributions are welcome! The most basic way to show your support is to ⭐️ star the project, or to raise 🐞 issues Also feel fre to make a pull request.
 
  ## License
 
-Outcast is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+Simpleblog is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
