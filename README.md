@@ -1,12 +1,3 @@
-Dog 
-get '/dogs'
-get '/dogs/:id'
-get '/dogs/new'
-post '/dogs'
-get '/dogs/:id/edit'
-patch '/dogs/:id'
-delete '/dogs/:id'
-
 # SimpleBlog App
 
 Flatiron Sinatra Project Simple Blog WebApp
