@@ -2,13 +2,13 @@ class PostsController < ApplicationController
 
   # adding Full C.R.U.D funcionality
 
-  # Getting all the post data from the DB.
+
   get "/posts" do
     @posts = Post.all.order(created_at: :desc)
     erb :"/posts/index"
   end
 
-  # Allow the user to Create a new Post if logged in.
+
   get "/posts/new" do
     if logged_in?
       erb :"/posts/new"
@@ -18,7 +18,7 @@ class PostsController < ApplicationController
     end
   end
 
-  # Saving the post created to the DB.
+
   post "/posts" do
     @post = Post.new(title: params[:title], image_url: params[:image_url], description: params[:description], user_id: current_user.id)
     #verifies if the input provided is acceptable and saves validation.
@@ -31,13 +31,13 @@ class PostsController < ApplicationController
     end
   end
 
-  # Route for an individual Post.
+
   get "/posts/:id" do
     @post = Post.find(params[:id])
     erb :"/posts/show"
   end
 
-  # Allow user to edit their Post but no one else's post.
+
   get "/posts/:id/edit" do
     @post = Post.find(params[:id])
       if authorized_to_edit?(@post)
@@ -48,16 +48,25 @@ class PostsController < ApplicationController
       end
   end
 
+
   patch "/posts/:id" do
     @post = Post.find(params[:id])
+    if authorized_to_edit?(@post)
     @post.update(title: params[:title], image_url: params[:image_url], description: params[:description])
     redirect "/posts/#{@post.id}"
+    else
+      erb :failure
+    end
   end
 
-  # Allow User to Delete a post by id.
+
   delete "/posts/:id" do
     @post = Post.find(params[:id])
+    if authorized_to_edit?(@post)
     @post.destroy
     redirect "/posts"
+    else
+      erb :failure
+    end
   end
 end

@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
 
-  # GET: /login (render) the Login Form
+
   get "/login" do
     erb :"/users/login"
   end
 
-  # POST: /login Receives the data from the Login form.
+
   post "/login" do
     @user = User.find_by(email: params[:email])
         if @user && @user.authenticate(params[:password])
@@ -19,26 +19,26 @@ class UsersController < ApplicationController
         end
   end
 
-  # show the user's route
+
   get "/users/:id" do
     @user = User.find_by(id: params[:id])
     erb :"/users/show"
   end
 
-  # show the signup route
+
   get "/signup" do
     erb :"/users/signup"
   end
 
-  # route to create user and post user and add key/value pairs.
+
   post "/users" do
     @user = User.create(params)
     session[:user_id] = @user.id
-    # show the user profile page
+
     redirect "/users/#{@user.id}"
   end
 
-  # Log the User out and clear session
+
   get "/logout" do
     session.clear
     redirect "/"
