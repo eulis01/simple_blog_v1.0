@@ -1,7 +1,5 @@
 class PostsController < ApplicationController
-
   # adding Full C.R.U.D funcionality
-
 
   get "/posts" do
     if logged_in?
@@ -26,8 +24,10 @@ class PostsController < ApplicationController
 
   post "/posts" do
     redirect_if_not_logged_in
-    @post = Post.new(title: params[:title], image_url: params[:image_url], description: params[:description], user_id: current_user.id)
-    #verifies if the input provided is acceptable and saves validation.
+    @post = Post.new(title: params[:title], image_url: params[:image_url], description: params[:description] )
+    # Shuvle the Post into the current_user.id
+    current_user.posts << @post
+    # Verifies if the input provided is acceptable and saves validation.
     if @post.save
       flash[:message] = "Great! Your Post is up!" 
       redirect to "/posts/#{ @post.id }"
