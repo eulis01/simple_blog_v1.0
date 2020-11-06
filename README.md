@@ -1,6 +1,6 @@
 # SimpleBlog App
 
-Flatiron Sinatra Project Simple Blog WebApp
+Flatiron Sinatra Project Simple Blog V1.0 WebApp Module #2 Project.
  
  a simple Blogging Application created to meet the MPV. 
 
