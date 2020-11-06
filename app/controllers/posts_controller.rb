@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
+  
   # adding Full C.R.U.D funcionality
-
   get "/posts" do
     if logged_in?
       @posts = Post.all.order(created_at: :desc)
@@ -11,7 +11,6 @@ class PostsController < ApplicationController
     end
   end
 
-
   get "/posts/new" do
     if logged_in?
       erb :"/posts/new"
@@ -20,7 +19,6 @@ class PostsController < ApplicationController
       redirect_if_not_logged_in
     end
   end
-
 
   post "/posts" do
     redirect_if_not_logged_in
@@ -37,7 +35,6 @@ class PostsController < ApplicationController
     end
   end
 
-
   get "/posts/:id" do
     if logged_in?
       @post = Post.find(params[:id])
@@ -47,7 +44,6 @@ class PostsController < ApplicationController
       redirect_if_not_logged_in
     end
   end
-
 
   get "/posts/:id/edit" do
       @post = Post.find(params[:id])
@@ -63,7 +59,6 @@ class PostsController < ApplicationController
     end
   end
 
-
   patch "/posts/:id" do
     if logged_in?
       @post = Post.find(params[:id])
@@ -77,7 +72,6 @@ class PostsController < ApplicationController
       redirect_if_not_logged_in
     end
   end
-
 
   delete "/posts/:id" do
     if logged_in?
