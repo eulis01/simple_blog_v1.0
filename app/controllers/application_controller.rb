@@ -30,7 +30,6 @@ class ApplicationController < Sinatra::Base
     !!current_user
     end
 
-    #abstract this
     def redirect_if_not_logged_in
       if !logged_in?
         redirect "/login"
