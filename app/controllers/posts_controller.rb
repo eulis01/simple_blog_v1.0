@@ -30,10 +30,10 @@ class PostsController < ApplicationController
     #verifies if the input provided is acceptable and saves validation.
     if @post.save
       flash[:message] = "Great! Your Post is up!" 
-      redirect "/posts/#{@post.id}"
+      redirect to "/posts/#{ @post.id }"
     else
-      flash[:error] = "Couldn't create your Post [#{@post.errors.full_messages.to_sentence}]"
-      redirect "posts/new"
+      flash[:error] = "Couldn't create your Post [#{ @post.errors.full_messages.to_sentence }]"
+      redirect to "/posts/new"
     end
   end
 
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
         erb :"/posts/edit"
       else
         flash[:error] = "Sorry! You Can't Edit This Post!"
-        redirect "/posts"
+        redirect to "/posts"
       end
     else
         redirect_if_not_logged_in
@@ -69,7 +69,7 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
       if authorized_to_edit?(@post)
         @post.update(title: params[:title], image_url: params[:image_url], description: params[:description])
-        redirect "/posts/#{@post.id}"
+        redirect to "/posts/#{ @post.id }"
       else
         erb :failure
       end
@@ -84,7 +84,7 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
       if authorized_to_edit?(@post)
         @post.destroy
-        redirect "/posts"
+        redirect to "/posts"
       else
         erb :failure
       end
