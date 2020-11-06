@@ -10,7 +10,7 @@ class UsersController < ApplicationController
           session[:user_id] = @user.id
           # Alert user that Login has been Accepted.
           flash[:message] = "!!Welcome Login Accepted!!"
-          redirect to "/users/#{@user.id}"
+          redirect to "/users/#{ @user.id }"
         else
           flash[:error] = "Invalid  Email or Password."
           redirect_if_not_logged_in
@@ -36,9 +36,9 @@ class UsersController < ApplicationController
     if @user.save
       flash[:message] = "Welcome To SimpleBlog 😃"
     session[:user_id] = @user.id
-    redirect to "/users/#{@user.id}"
+    redirect to "/users/#{ @user.id }"
     else
-      flash[:error] = "[#{@user.errors.full_messages.to_sentence}]!!"
+      flash[:error] = "[#{ @user.errors.full_messages.to_sentence }]!!"
       redirect to "/"
     end
   end
