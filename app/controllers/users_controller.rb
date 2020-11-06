@@ -17,7 +17,6 @@ class UsersController < ApplicationController
         end
   end
 
-
   get "/users/:id" do
     if logged_in? && User.find_by_id(params[:id])
       @user = User.find_by_id(params[:id])
@@ -42,7 +41,6 @@ class UsersController < ApplicationController
       redirect to "/"
     end
   end
-
 
   get "/logout" do
     if logged_in?
