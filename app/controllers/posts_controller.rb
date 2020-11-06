@@ -4,8 +4,13 @@ class PostsController < ApplicationController
 
 
   get "/posts" do
-    @posts = Post.all.order(created_at: :desc)
-    erb :"/posts/index"
+    if logged_in?
+      @posts = Post.all.order(created_at: :desc)
+      erb :"/posts/index"
+    else
+      flash[:error] = "Login To See All Posts!"
+      redirect_if_not_logged_in
+    end
   end
 
 
@@ -20,11 +25,12 @@ class PostsController < ApplicationController
 
 
   post "/posts" do
+    redirect_if_not_logged_in
     @post = Post.new(title: params[:title], image_url: params[:image_url], description: params[:description], user_id: current_user.id)
     #verifies if the input provided is acceptable and saves validation.
     if @post.save
       flash[:message] = "Great! Your Post is up!" 
-    redirect "/posts/#{@post.id}"
+      redirect "/posts/#{@post.id}"
     else
       flash[:error] = "Couldn't create your Post [#{@post.errors.full_messages.to_sentence}]"
       redirect "posts/new"
@@ -33,40 +39,57 @@ class PostsController < ApplicationController
 
 
   get "/posts/:id" do
-    @post = Post.find(params[:id])
-    erb :"/posts/show"
+    if logged_in?
+      @post = Post.find(params[:id])
+      erb :"/posts/show"
+    else
+      flash[:error] = "Please Login to see post"
+      redirect_if_not_logged_in
+    end
   end
 
 
   get "/posts/:id/edit" do
-    @post = Post.find(params[:id])
+      @post = Post.find(params[:id])
+    if current_user.id == @post.user_id
       if authorized_to_edit?(@post)
-      erb :"/posts/edit"
+        erb :"/posts/edit"
       else
         flash[:error] = "Sorry! You Can't Edit This Post!"
         redirect "/posts"
       end
+    else
+        redirect_if_not_logged_in
+    end
   end
 
 
   patch "/posts/:id" do
-    @post = Post.find(params[:id])
-    if authorized_to_edit?(@post)
-    @post.update(title: params[:title], image_url: params[:image_url], description: params[:description])
-    redirect "/posts/#{@post.id}"
+    if logged_in?
+      @post = Post.find(params[:id])
+      if authorized_to_edit?(@post)
+        @post.update(title: params[:title], image_url: params[:image_url], description: params[:description])
+        redirect "/posts/#{@post.id}"
+      else
+        erb :failure
+      end
     else
-      erb :failure
+      redirect_if_not_logged_in
     end
   end
 
 
   delete "/posts/:id" do
-    @post = Post.find(params[:id])
-    if authorized_to_edit?(@post)
-    @post.destroy
-    redirect "/posts"
+    if logged_in?
+      @post = Post.find(params[:id])
+      if authorized_to_edit?(@post)
+        @post.destroy
+        redirect "/posts"
+      else
+        erb :failure
+      end
     else
-      erb :failure
+      redirect_if_not_logged_in
     end
   end
 end
